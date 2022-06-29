@@ -49,11 +49,9 @@ kombi 3 is 0x520
 unsigned char stmp_kombi[8] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
 
 void loop() {
-   stmp_kombi[4] = stmp_kombi[4] + 0x1;
-   if (stmp_kombi[4] == 0x9f) {
-      stmp_kombi[4] = 0x00;
-   }
-
+   stmp_kombi[4] = (speedkmh >> 7,HEX);
+   stmp_kombi[5] = (speedkmh, HEX);
+   
    CAN.sendMsgBuf(0x320, 0, 8, stmp_kombi);
    delay(20); // send data per 50ms
    Serial.println("CAN BUS sendMsgBuf ok!");
